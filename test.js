@@ -1,10 +1,5 @@
-class Welcome extends React.Component {
-    render() {
-        return <h1>Hello, { this.props.name }</h1>
-    }
-}
 
-ReactDOM.render(
-    <Welcome name="Sara" />,
-    document.getElementById('root')
-);
+
+var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+var citrus = fruits.slice(1,3);
+console.log(citrus)

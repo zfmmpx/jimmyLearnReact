@@ -4,17 +4,21 @@ import './index.css';
 
 
 class Square extends React.Component {
-	constructor(props) {
-		super(props); // super作为函数时，代表父类的构造函数，但是this指向子类，
-		// super(props)即相当于：React.Component.prototype.constructor.call(this, props);
-		this.state = {
-			value: null,
-		};
-	}
+	// 因为已经不需要保存state了，因此可以不要下面的代码，隐式创建constructor
+	// constructor(props) {
+	// 	super(props); // super作为函数时，代表父类的构造函数，但是this指向子类，
+	// 	// super(props)即相当于：React.Component.prototype.constructor.call(this, props);
+	// 	this.state = {
+	// 		value: null,
+	// 	};
+	// }
 	
 	render() {
 		return (
-			<button className="square" onClick={() => { alert('click') }}>
+			<button 
+				className="square" 
+				onClick={() => this.props.onClick()}
+			>
 				{this.props.value}
 			</button>
 		);
@@ -22,8 +26,26 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			squares: Array(9).fill(null),
+		};
+	}
+
+	handleClick(i) {
+		const squares = this.state.squares.slice();
+		squares[i] = 'X';
+		this.setState({squares: squares});
+	}
+
 	renderSquare(i) {
-		return <Square value={i} />;
+		return (
+			<Square 
+				value={this.state.squares[i]} 
+				onClick={() => this.handleClick(i)}
+			/>
+		);
 	}
 
 	render() {
