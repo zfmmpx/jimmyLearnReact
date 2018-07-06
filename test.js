@@ -1,5 +1,17 @@
+let a = [0, 1, 2, 3, 4];
+let b = a.slice();
+console.log(a, b)
 
+a[0] = 7;
+console.log(a, b)
 
-var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
-var citrus = fruits.slice(1,3);
-console.log(citrus)
+let c = {
+  a: "a",
+  b: "b"
+}
+
+let d = c;
+console.log(c, d)
+d["a"] = "d";
+console.log(c, d)
+
