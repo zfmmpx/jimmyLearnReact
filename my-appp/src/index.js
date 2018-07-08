@@ -99,7 +99,8 @@ class Game extends React.Component {
 	}
 	
 	handleClick(i) {
-		const history = this.state.history; // 浅拷贝
+		// const history = this.state.history; // 浅拷贝
+		const history = this.state.history.slice(0, this.state.stepNumber + 1);
 		const current = history[history.length - 1]; // 浅拷贝
 		const squares = current.squares.slice(); // 深拷贝
 
@@ -111,27 +112,28 @@ class Game extends React.Component {
 			history: history.concat([{
 				squares: squares
 			}]),
+			stepNumber: history.length,
 			xIsNext: !this.state.xIsNext,
 		});
 	}
 
 	jumpTo(step) {
 		this.setState({
-			setpNumber: step,
+			stepNumber: step,
 			xIsNext: (step % 2) ? false :true,
 		});
 	}
 
 	render() {
 		const history = this.state.history;
-		const current = history[history.length -1];
+		const current = history[this.state.stepNumber];
 		const winner = calculateWinner(current.squares);
 
 		const moves = history.map((step, move) => {
 			const desc = move ? 'Move #' + move : 'Game start';
 			return (
 				<li key={move}>
-					<a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+					<button onClick={() => this.jumpTo(move)}>{desc}</button>
 				</li>
 			)
 		})
