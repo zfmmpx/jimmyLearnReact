@@ -1,17 +1,23 @@
-let a = [0, 1, 2, 3, 4];
-let b = a.slice();
-console.log(a, b)
-
-a[0] = 7;
-console.log(a, b)
-
-let c = {
-  a: "a",
-  b: "b"
+var object = {
+	data: [1, 2, 3],
+	dataDouble: [1, 2, 3],
+	double: function() {
+		console.log("this inside of outerFn double()");
+		console.log(this);
+		return this.data.map(function(item) {
+			console.log(this); // 这里的this指什么
+			return item * 2;
+		});
+	},
+	doubleArrow: function() {
+		console.log("this inside of outerFn doubleArrow()");
+		console.log(this);
+		return this.dataDouble.map(item => {
+			console.log(this);
+			return item * 2;
+		});
+	}
 }
 
-let d = c;
-console.log(c, d)
-d["a"] = "d";
-console.log(c, d)
-
+object.double();
+object.doubleArrow();
