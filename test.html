@@ -1,39 +1,72 @@
 <script>
-	var object = {
-		data: [1, 2, 3],
-		dataDouble: [1, 2, 3],
-		double: function () {
-			console.log("this inside of outerFn double()");
-			console.log(this);
-			return this.data.map(function (item) {
-				console.log(this); // 这里的this指什么
-				// return item * 2;
-			});
-		},
-		doubleArrow: function () {
-			console.log("this inside of outerFn doubleArrow()");
-			console.log(this);
-			return this.dataDouble.map(item => {
-				console.log(this); // 这里的this指什么
-				// return item * 2;
-			});
-		}
-	}
+	// var object = {
+	// 	data: [1, 2, 3],
+	// 	dataDouble: [1, 2, 3],
+	// 	double: function () {
+	// 		console.log("this inside of outerFn double()");
+	// 		console.log(this);
+	// 		return this.data.map(function (item) {
+	// 			console.log(this); // 这里的this指什么
+	// 			// return item * 2;
+	// 		});
+	// 	},
+	// 	doubleArrow: function () {
+	// 		console.log("this inside of outerFn doubleArrow()");
+	// 		console.log(this);
+	// 		return this.dataDouble.map(item => {
+	// 			console.log(this); // 这里的this指什么
+	// 			// return item * 2;
+	// 		});
+	// 	}
+	// }
 
-	// object.double();
-	// object.doubleArrow();
-	console.log(object.double());
-	console.log(object.doubleArrow());
+	// // object.double();
+	// // object.doubleArrow();
+	// console.log(object.double());
+	// console.log(object.doubleArrow());
 
-	// Array.map polifill
-	if (Array.prototype.map === undefined) {
-		Array.prototype.map = function(fn) {
-			var rv = [];
-			for(var i = 0, l = this.length; i < l; i++) {
-				rv.push(fn(this[i]));
-			}
-			return rv;
-		};
-	}
+	// // Array.map polifill
+	// if (Array.prototype.map === undefined) {
+	// 	Array.prototype.map = function(fn) {
+	// 		var rv = [];
+	// 		for(var i = 0, l = this.length; i < l; i++) {
+	// 			rv.push(fn(this[i]));
+	// 		}
+	// 		return rv;
+	// 	};
+	// }
 	
+
+
+	(function() {
+		'use strict';
+		console.log(this);
+	})();
+
+	(function() {
+		// 不使用严格模式
+		console.log(this);
+	})();
+	
+	
+	
+	(function() {
+		'use strict';
+		var item = {
+			document: 'My document',
+			getDoc: function() {
+				return this.document;
+			}
+		}
+		var a = item.getDoc;
+		console.log(a());
+	})();
+
+
+
+	
+
+
+
+
 </script>
